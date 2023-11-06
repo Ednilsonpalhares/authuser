@@ -1,10 +1,10 @@
 package com.ead.authuser.services;
 
-import com.ead.authuser.enums.RoleType;
-import com.ead.authuser.models.RoleModel;
+import com.ead.authuser.dataprovider.role.entity.RoleEntity;
+import com.ead.authuser.dataprovider.role.entity.enums.RoleTypeEntityEnum;
 
 import java.util.Optional;
 
 public interface RoleService {
-    Optional<RoleModel> findByRoleName(RoleType roleType);
+    Optional<RoleEntity> findByRoleName(RoleTypeEntityEnum roleType);
 }

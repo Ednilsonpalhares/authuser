@@ -1,8 +1,8 @@
 package com.ead.authuser.services.impl;
 
 import com.ead.authuser.clients.CourseClient;
-import com.ead.authuser.enums.ActionType;
-import com.ead.authuser.models.UserModel;
+import com.ead.authuser.dataprovider.user.entity.ActionType;
+import com.ead.authuser.dataprovider.user.entity.UserEntity;
 import com.ead.authuser.publishers.UserEventPublisher;
 import com.ead.authuser.repositories.UserRepository;
 import com.ead.authuser.services.UserService;
@@ -30,23 +30,23 @@ public class UserServiceImpl implements UserService {
     UserEventPublisher userEventPublisher;
 
     @Override
-    public List<UserModel> findAll() {
+    public List<UserEntity> findAll() {
         return userRepository.findAll();
     }
 
     @Override
-    public Optional<UserModel> findById(UUID userId) {
+    public Optional<UserEntity> findById(UUID userId) {
         return userRepository.findById(userId);
     }
 
     @Transactional
     @Override
-    public void delete(UserModel userModel) {
+    public void delete(UserEntity userModel) {
         userRepository.delete(userModel);
     }
 
     @Override
-    public UserModel save(UserModel userModel) {
+    public UserEntity save(UserEntity userModel) {
         return userRepository.save(userModel);
     }
 
@@ -61,13 +61,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Page<UserModel> findAll(Specification<UserModel> spec, Pageable pageable) {
+    public Page<UserEntity> findAll(Specification<UserEntity> spec, Pageable pageable) {
         return userRepository.findAll(spec, pageable);
     }
 
     @Transactional
     @Override
-    public UserModel saveUser(UserModel userModel){
+    public UserEntity saveUser(UserEntity userModel){
         userModel = save(userModel);
         userEventPublisher.publishUserEvent(userModel.convertToUserEventDto(), ActionType.CREATE);
         return userModel;
@@ -75,21 +75,21 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void deleteUser(UserModel userModel) {
+    public void deleteUser(UserEntity userModel) {
         delete(userModel);
         userEventPublisher.publishUserEvent(userModel.convertToUserEventDto(), ActionType.DELETE);
     }
 
     @Transactional
     @Override
-    public UserModel updateUser(UserModel userModel) {
+    public UserEntity updateUser(UserEntity userModel) {
         userModel = save(userModel);
         userEventPublisher.publishUserEvent(userModel.convertToUserEventDto(), ActionType.UPDATE);
         return userModel;
     }
 
     @Override
-    public UserModel updatePassword(UserModel userModel) {
+    public UserEntity updatePassword(UserEntity userModel) {
         return save(userModel);
     }
 }

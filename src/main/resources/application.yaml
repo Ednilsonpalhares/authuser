@@ -35,6 +35,9 @@ spring:
         retry:
           enabled: true
         acknowledge-mode: auto
+  flyway:
+    baseline-on-migrate: true
+    fail-on-missing-locations: true
 
 logging:
   level:

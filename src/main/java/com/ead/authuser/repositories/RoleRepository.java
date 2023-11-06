@@ -1,12 +1,12 @@
 package com.ead.authuser.repositories;
 
-import com.ead.authuser.enums.RoleType;
-import com.ead.authuser.models.RoleModel;
+import com.ead.authuser.dataprovider.role.entity.enums.RoleTypeEntityEnum;
+import com.ead.authuser.dataprovider.role.entity.RoleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
 import java.util.UUID;
 
-public interface RoleRepository extends JpaRepository<RoleModel, UUID> {
-    Optional<RoleModel> findByRoleName(RoleType name);
+public interface RoleRepository extends JpaRepository<RoleEntity, UUID> {
+
+    RoleEntity findByRoleName(RoleTypeEntityEnum roleType);
 }
