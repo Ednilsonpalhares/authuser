@@ -39,8 +39,10 @@ public class UserEntity extends RepresentationModel<UserEntity> implements Seria
     @Column(nullable = false, length = 150)
     private String fullName;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private UserStatusEntityEnum userStatus;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private UserTypeEntityEnum userType;
     @Column(length = 20)
     private String phoneNumber;
@@ -64,7 +66,6 @@ public class UserEntity extends RepresentationModel<UserEntity> implements Seria
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<RoleEntity> roles = new HashSet<>();
 
-
     public UserEventDto convertToUserEventDto(){
         var userEventDto = new UserEventDto();
         BeanUtils.copyProperties(this, userEventDto);
@@ -72,5 +73,4 @@ public class UserEntity extends RepresentationModel<UserEntity> implements Seria
         userEventDto.setUserStatus(this.getUserStatus().toString());
         return userEventDto;
     }
-
 }

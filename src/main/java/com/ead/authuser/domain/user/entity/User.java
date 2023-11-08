@@ -6,10 +6,12 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
@@ -18,7 +20,6 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private String oldPassword;
     private String fullName;
     private UserStatusEnum userStatus;
     private UserTypeEnum userType;

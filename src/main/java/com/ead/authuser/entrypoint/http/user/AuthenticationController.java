@@ -2,7 +2,7 @@ package com.ead.authuser.entrypoint.http.user;
 
 import com.ead.authuser.configs.security.JwtProvider;
 import com.ead.authuser.domain.user.entity.User;
-import com.ead.authuser.domain.user.usecase.SignupUseCase;
+import com.ead.authuser.domain.user.usecase.RegisterUserUseCase;
 import com.ead.authuser.dtos.JwtDto;
 import com.ead.authuser.dtos.LoginDto;
 import com.ead.authuser.entrypoint.http.user.dto.request.UserRequestDTO;
@@ -13,7 +13,6 @@ import com.ead.authuser.dataprovider.user.entity.UserTypeEntityEnum;
 import com.ead.authuser.dataprovider.role.entity.RoleEntity;
 import com.ead.authuser.dataprovider.user.entity.UserEntity;
 import com.ead.authuser.services.UserService;
-import com.fasterxml.jackson.annotation.JsonView;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
@@ -39,19 +38,18 @@ import java.time.ZoneId;
 public class AuthenticationController {
 
     private final UserService userService;
-    private final SignupUseCase signupUseCase;
+    private final RegisterUserUseCase registerUserUseCase;
     private final UserMapperEntrypoint userMapper;
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
     private final AuthenticationManager authenticationManager;
 
     @PostMapping("/signup")
-    public ResponseEntity<UserResponseDTO> registerUser(@RequestBody @Validated(UserRequestDTO.UserView.RegistrationPost.class)
-                                                   @JsonView(UserRequestDTO.UserView.RegistrationPost.class) UserRequestDTO userDto){
+    public ResponseEntity<UserResponseDTO> registerUser(@RequestBody @Validated UserRequestDTO userDto){
 
         final User user = userMapper.userDtoToUser(userDto);
         return  ResponseEntity.status(HttpStatus.CREATED)
-                .body(userMapper.userToUserResponseDTO(signupUseCase.execute(user)));
+                .body(userMapper.userToUserResponseDTO(registerUserUseCase.execute(user)));
     }
 
     @PostMapping("/login")
@@ -64,8 +62,8 @@ public class AuthenticationController {
     }
 
     @PostMapping("/signup/admin/usr")
-    public ResponseEntity<Object> registerUserAdmin(@RequestBody @Validated(UserRequestDTO.UserView.RegistrationPost.class)
-                                               @JsonView(UserRequestDTO.UserView.RegistrationPost.class) UserRequestDTO userDto){
+    public ResponseEntity<Object> registerUserAdmin(@RequestBody @Validated
+                                                UserRequestDTO userDto){
         log.debug("POST registerUser userDto received {} ", userDto.toString());
         if(userService.existsByUsername(userDto.getUsername())){
             log.warn("Username {} is Already Taken ", userDto.getUsername());
