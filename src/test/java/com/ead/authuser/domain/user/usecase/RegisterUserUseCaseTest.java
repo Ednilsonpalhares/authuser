@@ -29,7 +29,7 @@ class RegisterUserUseCaseTest {
     @Mock
     private FindByRoleNameUseCase findByRoleNameUseCase;
     @InjectMocks
-    private RegisterUserUseCase registerUserUseCase;
+    private RegisterUseCase registerUserUseCase;
 
     @Test
     void shouldThrowBusinessExceptionWhenExistRegisteredUserName(){

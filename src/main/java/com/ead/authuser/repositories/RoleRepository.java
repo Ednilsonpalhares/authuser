@@ -1,7 +1,7 @@
 package com.ead.authuser.repositories;
 
-import com.ead.authuser.dataprovider.role.entity.enums.RoleTypeEntityEnum;
-import com.ead.authuser.dataprovider.role.entity.RoleEntity;
+import com.ead.authuser.dataprovider.http.role.entity.enums.RoleTypeEntityEnum;
+import com.ead.authuser.dataprovider.http.role.entity.RoleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

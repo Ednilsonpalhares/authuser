@@ -1,7 +1,7 @@
 package com.ead.authuser.dtos;
 
-import com.ead.authuser.dataprovider.user.entity.CourseLevel;
-import com.ead.authuser.dataprovider.user.entity.CourseStatus;
+import com.ead.authuser.dataprovider.http.user.entity.CourseLevel;
+import com.ead.authuser.dataprovider.http.user.entity.CourseStatus;
 import lombok.Data;
 
 import java.util.UUID;

@@ -30,4 +30,6 @@ public class UserRequestDTO {
     private String cpf;
     @NotBlank
     private String imageUrl;
+    @NotBlank
+    private String userType;
 }
