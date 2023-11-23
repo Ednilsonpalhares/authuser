@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(
-    name = "event-client",
-    url = "${spring.cloud.openfeign.client.config.course}",
+    name = "course-client",
+    url = "${spring.cloud.openfeign.client.config.course.baseUrl}",
     configuration = FeignConfig.class)
 public interface CourseFeignClient {
 

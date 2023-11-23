@@ -7,7 +7,7 @@ spring:
   application:
     name: ead-authuser-service
   datasource:
-    url:  jdbc:postgresql://localhost:5432/ead-authuser
+    url: jdbc:postgresql://localhost:5432/ead-authuser
     username: postgres
     password: banco123
   jpa:
@@ -24,16 +24,22 @@ spring:
       enabled: Always
   rabbitmq:
     host: localhost
-    password: guest
-    username: guest
     port: 5672
+    username: guest
+    password: guest
+    virtual-host: local-vh
     ssl:
       enabled: false
+      algorithm: TLSv1.2
+      verify-hostname: false
     listener:
       simple:
         default-requeue-rejected: false
         retry:
           enabled: true
+          initial-interval: 3s
+          max-interval: 10s
+          multiplier: 2
         acknowledge-mode: auto
   flyway:
     baseline-on-migrate: true
@@ -42,7 +48,7 @@ spring:
     openfeign:
       client:
         config:
-          course: http://localhost:8081/ead-course
+          course.baseUrl: 'http://localhost:8081/ead-course'
 
 logging:
   level:
@@ -50,6 +56,7 @@ logging:
     root: INFO
     org.springframework.web: INFO
     org.hibernate: INFO
+    org.springframework.amqp.rabbit: { INFO, ERROR, DEBUG }
 
 ead:
   broker:

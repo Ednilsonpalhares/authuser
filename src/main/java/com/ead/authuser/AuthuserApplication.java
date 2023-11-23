@@ -8,12 +8,12 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 public class AuthuserApplication {
 
-	public static void main(String[] args) {
-		try{
+  public static void main(String[] args) {
+    try {
 
-		SpringApplication.run(AuthuserApplication.class, args);
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-	}
+      SpringApplication.run(AuthuserApplication.class, args);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 }

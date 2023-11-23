@@ -1,4 +1,4 @@
-package com.ead.authuser.domain.course.mapper;
+package com.ead.authuser.dataprovider.http.course.mapper;
 
 import com.ead.authuser.communs.pagination.Page;
 import com.ead.authuser.dataprovider.http.course.entity.CourseEntity;

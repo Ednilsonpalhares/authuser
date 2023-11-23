@@ -3,8 +3,8 @@ package com.ead.authuser.domain.user.usecase;
 import static java.util.Objects.isNull;
 
 import com.ead.authuser.communs.pagination.Page;
-import com.ead.authuser.dataprovider.http.course.CourseGateway;
 import com.ead.authuser.domain.course.entity.Course;
+import com.ead.authuser.domain.course.gateway.CourseGateway;
 import com.ead.authuser.domain.exception.NotFoundException;
 import com.ead.authuser.domain.user.gateway.UserGateway;
 import java.util.UUID;
@@ -22,9 +22,9 @@ public class FindAllCourserUseCase {
   private final UserGateway userGateway;
   private final CourseGateway courseGateway;
 
-  public Page<Course> execute(UUID uuid, Pageable pageable, String token) {
-    if(isNull(userGateway.findBUuid(uuid))){
-        throw new NotFoundException("User not found", HttpStatus.NOT_FOUND.value());
+  public Page<Course> execute(final String token, final UUID uuid, final Pageable pageable) {
+    if (isNull(userGateway.findBUuid(uuid))) {
+      throw new NotFoundException("User not found", HttpStatus.NOT_FOUND.value());
     }
     return courseGateway.findAllCoursesByUser(token, uuid, pageable);
   }

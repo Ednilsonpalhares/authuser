@@ -4,16 +4,18 @@ import com.ead.authuser.dataprovider.http.user.entity.CourseLevel;
 import com.ead.authuser.dataprovider.http.user.entity.CourseStatus;
 import java.util.UUID;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class CourseEntity {
 
-    private UUID courseId;
-    private String name;
-    private String description;
-    private String imageUrl;
-    private CourseStatus courseStatus;
-    private UUID userInstructor;
-    private CourseLevel courseLevel;
+  private UUID courseId;
+  private String name;
+  private String description;
+  private String imageUrl;
+  private CourseStatus courseStatus;
+  private UUID userInstructor;
+  private CourseLevel courseLevel;
 }

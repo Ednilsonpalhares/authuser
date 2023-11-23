@@ -1,11 +1,11 @@
-package com.ead.authuser.domain.course;
+package com.ead.authuser.dataprovider.http.course;
 
 import com.ead.authuser.communs.pagination.Page;
-import com.ead.authuser.dataprovider.http.course.CourseGateway;
 import com.ead.authuser.dataprovider.http.course.client.CourseFeignClient;
 import com.ead.authuser.dataprovider.http.course.entity.CourseEntity;
+import com.ead.authuser.dataprovider.http.course.mapper.CourseMapper;
 import com.ead.authuser.domain.course.entity.Course;
-import com.ead.authuser.domain.course.mapper.CourseMapper;
+import com.ead.authuser.domain.course.gateway.CourseGateway;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +19,9 @@ public class CourseGatewayImpl implements CourseGateway {
   private final CourseMapper courseMapper;
 
   @Override
-  public Page<Course> findAllCoursesByUser(String token, UUID userId, Pageable pageable) {
+  public Page<Course> findAllCoursesByUser(
+      final String token, final UUID userId, final Pageable pageable) {
+
     final Page<CourseEntity> courseEntity =
         courseFeignClient.getAllCoursesByUser(token, userId, pageable);
 

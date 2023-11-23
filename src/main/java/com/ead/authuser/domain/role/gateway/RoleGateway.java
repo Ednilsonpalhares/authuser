@@ -5,5 +5,5 @@ import com.ead.authuser.domain.role.entity.enums.RoleTypeEnum;
 
 public interface RoleGateway {
 
-    Role findByRoleName(RoleTypeEnum roleType);
+  Role findByRoleName(RoleTypeEnum roleType);
 }

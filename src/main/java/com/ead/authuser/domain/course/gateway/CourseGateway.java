@@ -1,9 +1,8 @@
-package com.ead.authuser.dataprovider.http.course;
-
-import java.util.UUID;
+package com.ead.authuser.domain.course.gateway;
 
 import com.ead.authuser.communs.pagination.Page;
 import com.ead.authuser.domain.course.entity.Course;
+import java.util.UUID;
 import org.springframework.data.domain.Pageable;
 
 public interface CourseGateway {
