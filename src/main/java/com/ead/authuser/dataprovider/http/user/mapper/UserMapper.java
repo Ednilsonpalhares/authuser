@@ -5,14 +5,10 @@ import com.ead.authuser.domain.user.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 
-import java.util.Optional;
-
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface UserMapper {
 
-  UserEntity userToUserEntity(User user);
+    UserEntity userToUserEntity(User user);
 
-  User userEntityToUser(UserEntity userEntity);
-
-  User optionalUserEntityToUser(Optional<UserEntity> userEntity);
+    User userEntityToUser(UserEntity userEntity);
 }
