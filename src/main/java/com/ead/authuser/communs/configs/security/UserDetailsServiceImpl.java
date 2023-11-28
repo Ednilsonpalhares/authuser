@@ -1,7 +1,7 @@
 package com.ead.authuser.communs.configs.security;
 
-import com.ead.authuser.dataprovider.http.user.entity.UserEntity;
-import com.ead.authuser.repositories.UserRepository;
+import com.ead.authuser.dataprovider.database.user.UserRepository;
+import com.ead.authuser.dataprovider.database.user.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.userdetails.UserDetails;

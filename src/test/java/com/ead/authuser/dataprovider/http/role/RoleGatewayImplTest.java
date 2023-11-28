@@ -1,12 +1,12 @@
 package com.ead.authuser.dataprovider.http.role;
 
 import com.ead.authuser.comuns.util.TestUtils;
-import com.ead.authuser.dataprovider.http.role.entity.RoleEntity;
-import com.ead.authuser.dataprovider.http.role.entity.enums.RoleTypeEntityEnum;
+import com.ead.authuser.dataprovider.database.role.RoleRepository;
+import com.ead.authuser.dataprovider.database.role.entity.RoleEntity;
+import com.ead.authuser.dataprovider.database.role.entity.enums.RoleTypeEntityEnum;
 import com.ead.authuser.dataprovider.http.role.mapper.RoleMapper;
 import com.ead.authuser.domain.role.entity.Role;
 import com.ead.authuser.domain.role.entity.enums.RoleTypeEnum;
-import com.ead.authuser.repositories.RoleRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

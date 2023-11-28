@@ -1,6 +1,6 @@
-package com.ead.authuser.dataprovider.http.role.entity;
+package com.ead.authuser.dataprovider.database.role.entity;
 
-import com.ead.authuser.dataprovider.http.role.entity.enums.RoleTypeEntityEnum;
+import com.ead.authuser.dataprovider.database.role.entity.enums.RoleTypeEntityEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,4 +1,4 @@
-package com.ead.authuser.dtos;
+package com.ead.authuser.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,10 +9,10 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
-public class ResponsePageDto<T> extends PageImpl<T> {
+public class ResponsePageDTO<T> extends PageImpl<T> {
 
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
-    public ResponsePageDto(@JsonProperty("content") List<T> content,
+    public ResponsePageDTO(@JsonProperty("content") List<T> content,
                            @JsonProperty("number") int number,
                            @JsonProperty("size") int size,
                            @JsonProperty("totalElements") Long totalElements,
@@ -26,11 +26,11 @@ public class ResponsePageDto<T> extends PageImpl<T> {
         super(content, PageRequest.of(number, size), totalElements);
     }
 
-    public ResponsePageDto(List<T> content, Pageable pageable, long total) {
+    public ResponsePageDTO(List<T> content, Pageable pageable, long total) {
         super(content, pageable, total);
     }
 
-    public ResponsePageDto(List<T> content) {
+    public ResponsePageDTO(List<T> content) {
         super(content);
     }
 }

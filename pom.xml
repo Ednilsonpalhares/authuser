@@ -199,6 +199,16 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco-maven.version}</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/entity/**</exclude>
+                        <exclude>**/*MapperImpl.*</exclude>
+                        <exclude>**/AuthuserApplication.*</exclude>
+                        <exclude>**/dto/**</exclude>
+                        <exclude>**/specifications/**</exclude>
+                        <exclude>**/communs/**</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>

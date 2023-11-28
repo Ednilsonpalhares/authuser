@@ -1,4 +1,4 @@
-package com.ead.authuser.dtos;
+package com.ead.authuser.dto;
 
 import lombok.Data;
 
@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
-public class PaymentEventDto {
+public class PaymentEventDTO {
 
     private UUID paymentId;
     private String paymentControl;

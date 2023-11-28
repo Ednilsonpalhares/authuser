@@ -1,4 +1,4 @@
-package com.ead.authuser.dtos;
+package com.ead.authuser.dto;
 
 import lombok.Data;
 import lombok.NonNull;
@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor
-public class JwtDto {
+public class JwtDTO {
 
     @NonNull
     private String token;

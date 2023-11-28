@@ -1,4 +1,4 @@
-package com.ead.authuser.dtos;
+package com.ead.authuser.dto;
 
 import com.ead.authuser.dataprovider.http.user.entity.CourseLevel;
 import com.ead.authuser.dataprovider.http.user.entity.CourseStatus;
@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-public class CourseDto {
+public class CourseDTO {
 
     private UUID courseId;
     private String name;

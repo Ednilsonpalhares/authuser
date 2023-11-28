@@ -1,7 +1,7 @@
 package com.ead.authuser.dataprovider.http.user.mapper;
 
 import com.ead.authuser.comuns.util.TestUtils;
-import com.ead.authuser.dataprovider.http.user.entity.UserEntity;
+import com.ead.authuser.dataprovider.database.user.entity.UserEntity;
 import com.ead.authuser.domain.user.entity.User;
 import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.Test;

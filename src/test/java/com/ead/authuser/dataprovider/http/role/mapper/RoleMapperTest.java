@@ -1,7 +1,7 @@
 package com.ead.authuser.dataprovider.http.role.mapper;
 
 import com.ead.authuser.comuns.util.TestUtils;
-import com.ead.authuser.dataprovider.http.role.entity.RoleEntity;
+import com.ead.authuser.dataprovider.database.role.entity.RoleEntity;
 import com.ead.authuser.domain.role.entity.Role;
 import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.Test;

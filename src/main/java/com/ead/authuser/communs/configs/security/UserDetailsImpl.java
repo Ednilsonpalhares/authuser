@@ -1,16 +1,17 @@
 package com.ead.authuser.communs.configs.security;
 
-import com.ead.authuser.dataprovider.http.user.entity.UserEntity;
+import com.ead.authuser.dataprovider.database.user.entity.UserEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor

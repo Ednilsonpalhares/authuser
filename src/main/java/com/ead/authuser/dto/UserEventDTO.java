@@ -1,12 +1,11 @@
-package com.ead.authuser.dtos;
+package com.ead.authuser.dto;
 
 import lombok.Data;
-import org.springframework.beans.BeanUtils;
 
 import java.util.UUID;
 
 @Data
-public class UserEventDto {
+public class UserEventDTO {
 
     private UUID userId;
     private String username;

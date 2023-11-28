@@ -1,10 +1,10 @@
 package com.ead.authuser.dataprovider.http.user;
 
-import com.ead.authuser.dataprovider.http.user.entity.UserEntity;
+import com.ead.authuser.dataprovider.database.user.UserRepository;
+import com.ead.authuser.dataprovider.database.user.entity.UserEntity;
 import com.ead.authuser.dataprovider.http.user.mapper.UserMapper;
 import com.ead.authuser.domain.user.entity.User;
 import com.ead.authuser.domain.user.gateway.UserGateway;
-import com.ead.authuser.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -67,7 +67,7 @@ public class UserGatewayImpl implements UserGateway {
     }
 
     @Override
-    public User findBUuid(UUID userId) {
-        return userMapper.userEntityToUser(userRepository.findUserById(userId));
+    public User findById(UUID id) {
+        return userMapper.userEntityToUser(userRepository.findUserById(id));
     }
 }

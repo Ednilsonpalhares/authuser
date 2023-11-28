@@ -1,6 +1,6 @@
-package com.ead.authuser.repositories;
+package com.ead.authuser.dataprovider.database.user;
 
-import com.ead.authuser.dataprovider.http.user.entity.UserEntity;
+import com.ead.authuser.dataprovider.database.user.entity.UserEntity;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
