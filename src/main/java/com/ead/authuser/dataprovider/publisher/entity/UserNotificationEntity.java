@@ -1,14 +1,14 @@
 package com.ead.authuser.dataprovider.publisher.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.UUID;
-import lombok.Data;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserProducerEntity implements Serializable {
+public class UserNotificationEntity implements Serializable {
 
     private UUID userId;
     private String username;

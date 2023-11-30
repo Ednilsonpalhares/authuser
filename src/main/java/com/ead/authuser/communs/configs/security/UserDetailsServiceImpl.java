@@ -2,7 +2,7 @@ package com.ead.authuser.communs.configs.security;
 
 import com.ead.authuser.dataprovider.database.user.UserRepository;
 import com.ead.authuser.dataprovider.database.user.entity.UserEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -25,9 +25,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     public UserDetails loadUserById(UUID userId) throws AuthenticationCredentialsNotFoundException {
-        UserEntity userModel = userRepository.findById(userId)
-                .orElseThrow(() -> new AuthenticationCredentialsNotFoundException("User Not Found with userId: " + userId));
+        UserEntity userModel = userRepository.findUserById(userId);
+        //.orElseThrow(() -> new AuthenticationCredentialsNotFoundException("User Not Found with userId: " + userId));
         return UserDetailsImpl.build(userModel);
     }
-
 }

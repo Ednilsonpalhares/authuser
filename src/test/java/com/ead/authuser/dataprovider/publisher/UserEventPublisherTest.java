@@ -1,8 +1,10 @@
 package com.ead.authuser.dataprovider.publisher;
 
 import com.ead.authuser.comuns.util.TestUtils;
-import com.ead.authuser.dataprovider.http.user.entity.ActionType;
-import com.ead.authuser.dataprovider.publisher.entity.UserProducerEntity;
+import com.ead.authuser.dataprovider.http.user.entity.ActionTypeEnum;
+import com.ead.authuser.dataprovider.publisher.entity.UserNotificationEntity;
+import com.ead.authuser.dataprovider.publisher.mapper.UserNotificationMapper;
+import com.ead.authuser.domain.user.entity.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,8 +18,10 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.stream.Stream;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class UserEventPublisherTest {
@@ -25,15 +29,16 @@ class UserEventPublisherTest {
     private static final String EXCHANGE_USER_EVENT = "ead.userevent";
     @Mock
     private RabbitTemplate rabbitTemplate;
-
+    @Mock
+    private UserNotificationMapper userNotificationMapper;
     @InjectMocks
     private UserEventPublisher userEventPublisher;
 
     static Stream<Arguments> argumentsStream() {
         return Stream.of(
-                Arguments.of(ActionType.CREATE),
-                Arguments.of(ActionType.UPDATE),
-                Arguments.of(ActionType.DELETE)
+                Arguments.of(ActionTypeEnum.CREATE),
+                Arguments.of(ActionTypeEnum.UPDATE),
+                Arguments.of(ActionTypeEnum.DELETE)
         );
     }
 
@@ -44,13 +49,18 @@ class UserEventPublisherTest {
 
     @ParameterizedTest
     @MethodSource("argumentsStream")
-    void shouldPublishUser(final ActionType actionType) {
+    void shouldPublishUser(final ActionTypeEnum actionTypeEnum) {
 
-        final UserProducerEntity userProducerEntity = TestUtils.EASY_RANDOM.nextObject(UserProducerEntity.class);
+        final User user = TestUtils.EASY_RANDOM.nextObject(User.class);
+        final UserNotificationEntity userNotificationEntity = TestUtils.EASY_RANDOM.nextObject(UserNotificationEntity.class);
+        userNotificationEntity.setActionType(actionTypeEnum.name());
 
-        userEventPublisher.publishUserEvent(userProducerEntity, actionType);
+        when(userNotificationMapper.userToUserNotificationEntity(any(), any()))
+                .thenReturn(userNotificationEntity);
+
+        userEventPublisher.publishUserNotification(user, actionTypeEnum);
 
         verify(rabbitTemplate, times(1)).
-                convertAndSend(EXCHANGE_USER_EVENT, "", userProducerEntity);
+                convertAndSend(EXCHANGE_USER_EVENT, "", userNotificationEntity);
     }
 }

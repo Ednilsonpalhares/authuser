@@ -1,7 +1,7 @@
 package com.ead.authuser.dataprovider.http.user.entity;
 
-public enum ActionType {
+public enum ActionTypeEnum {
     CREATE,
     UPDATE,
-    DELETE;
+    DELETE
 }

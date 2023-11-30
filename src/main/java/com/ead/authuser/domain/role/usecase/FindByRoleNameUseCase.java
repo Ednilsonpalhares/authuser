@@ -1,26 +1,26 @@
 package com.ead.authuser.domain.role.usecase;
 
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-
-import com.ead.authuser.domain.role.gateway.RoleGateway;
 import com.ead.authuser.domain.exception.NotFoundException;
 import com.ead.authuser.domain.role.entity.Role;
 import com.ead.authuser.domain.role.entity.enums.RoleTypeEnum;
-import java.util.Objects;
+import com.ead.authuser.domain.role.gateway.RoleGateway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import static java.util.Objects.isNull;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
 public class FindByRoleNameUseCase {
 
-  private final RoleGateway roleGateway;
+    private final RoleGateway roleGateway;
 
-  public Role execute(RoleTypeEnum roleType) {
-    Role role = roleGateway.findByRoleName(roleType);
-    if (Objects.isNull(role)) {
-      throw new NotFoundException("Role is Not Found.", NOT_FOUND.value());
+    public Role execute(final RoleTypeEnum roleType) {
+        final Role role = roleGateway.findByRoleName(roleType);
+        if (isNull(role)) {
+            throw new NotFoundException("Role is Not Found.", NOT_FOUND.value());
+        }
+        return role;
     }
-    return role;
-  }
 }

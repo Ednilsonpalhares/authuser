@@ -1,7 +1,7 @@
 package com.ead.authuser.communs.configs.security;
 
 import jakarta.servlet.DispatcherType;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
@@ -21,20 +21,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableMethodSecurity
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class WebSecurityConfig {
-
-    @Autowired
-    UserDetailsServiceImpl userDetailsService;
-
-    @Autowired
-    AuthenticationEntryPointImpl authenticationEntryPoint;
-
-    @Autowired
-    AccessDeniedHandlerImpl accessDeniedHandler;
 
     private static final String[] AUTH_WHITELIST = {
             "/auth/**"
     };
+    private final UserDetailsServiceImpl userDetailsService;
+    private final AuthenticationEntryPointImpl authenticationEntryPoint;
+    private final AccessDeniedHandlerImpl accessDeniedHandler;
 
     @Bean
     public AuthenticationJwtFilter authenticationJwtFilter() {
@@ -66,7 +61,7 @@ public class WebSecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
-//                .shouldFilterAllDispatcherTypes(true)
+                .shouldFilterAllDispatcherTypes(true)
                 .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
                 .requestMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest().authenticated()
@@ -85,6 +80,4 @@ public class WebSecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-
 }

@@ -2,17 +2,16 @@ package com.ead.authuser.domain.user.usecase;
 
 import com.ead.authuser.comuns.util.TestUtils;
 import com.ead.authuser.dataprovider.publisher.UserEventPublisher;
-import com.ead.authuser.dataprovider.publisher.entity.UserProducerEntity;
 import com.ead.authuser.domain.exception.BusinessException;
 import com.ead.authuser.domain.role.entity.Role;
 import com.ead.authuser.domain.role.usecase.FindByRoleNameUseCase;
 import com.ead.authuser.domain.user.entity.User;
 import com.ead.authuser.domain.user.gateway.UserGateway;
-import com.ead.authuser.domain.user.usecase.mapper.UserProducerMapper;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,13 +21,11 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@MockitoSettings
+@ExtendWith(MockitoExtension.class)
 class RegisterUserUseCaseTest {
 
     @Mock
     private UserEventPublisher userEventPublisher;
-    @Mock
-    private UserProducerMapper userProducerMapper;
     @Mock
     private UserGateway userGateway;
     @Mock
@@ -69,7 +66,6 @@ class RegisterUserUseCaseTest {
         when(passwordEncoder.encode(userMock.getPassword())).thenReturn(userMock.getPassword());
         when(findByRoleNameUseCase.execute(any())).thenReturn(Role.builder().build());
         when(userGateway.save(userMock)).thenReturn(userMock);
-        when(userProducerMapper.userToUserProducerEntity(any())).thenReturn(new UserProducerEntity());
 
         final User user = registerUserUseCase.execute(userMock);
 
@@ -78,8 +74,8 @@ class RegisterUserUseCaseTest {
         verify(passwordEncoder, times(1)).encode(userMock.getPassword());
         verify(findByRoleNameUseCase, times(1)).execute(any());
         verify(userGateway, times(1)).save(userMock);
-        verify(userEventPublisher, times(1)).publishUserEvent(any(), any());
-        
+        verify(userEventPublisher, times(1)).publishUserNotification(any(), any());
+
         assertEquals(userMock.getUsername(), user.getUsername());
         assertEquals(userMock.getCpf(), user.getCpf());
         assertEquals(userMock.getEmail(), user.getEmail());
